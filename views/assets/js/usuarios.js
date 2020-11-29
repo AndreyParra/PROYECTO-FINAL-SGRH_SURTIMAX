@@ -509,71 +509,7 @@ $('.box-body').on("click", ".btnMostrarVacante", function(){
       dataType: "json",
       success: function(respuesta){
 
-         if(respuesta["NameVacant"] == 2) {
-
-                    
-                      $('#editarNameOcu1').html("Auxiliar");
-                      $('#editarNameOcu1').val(2);
-
-                      $('#editarNameOcu2').val(3);
-                      $('#editarNameOcu2').html("Cajero");
-
-                      $('#editarNameOcu3').val(4);
-                      $('#editarNameOcu3').html("Bodeguista");
-
-                      $('#editarNameOcu4').val(5);
-                      $('#editarNameOcu4').html("Domiciliario");
-
-
-                    }else if(respuesta["NameVacant"] ==  3) {
-
-                    
-                    $('#editarNameOcu1').html("Cajero");
-                    $('#editarNameOcu1').val(3);
-
-                    $('#editarNameOcu2').val(2);
-                    $('#editarNameOcu2').html("Auxiliar");
-
-                    $('#editarNameOcu3').val(4);
-                    $('#editarNameOcu3').html("Bodeguista");
-
-                    $('#editarNameOcu4').val(5);
-                    $('#editarNameOcu4').html("Domiciliario");
-
-
-                    }else if(respuesta["NameVacant"] == 4) {
-
-
-                      $('#editarNameOcu1').html("Bodeguista");
-                      $('#editarNameOcu1').val(4);
-
-                      $('#editarNameOcu2').val(2);
-                      $('#editarNameOcu2').html("Auxiliar");
-
-                      $('#editarNameOcu3').val(3);
-                      $('#editarNameOcu3').html("Cajero");
-
-                      $('#editarNameOcu4').val(5);
-                      $('#editarNameOcu4').html("Domiciliario");
-
-                   
-                    }else if(respuesta["NameVacant"] == 5) {
-
-                     $('#editarNameOcu1').html("Domiciliario");
-                     $('#editarNameOcu1').val(5);
-
-                     $('#editarNameOcu2').val(2);
-                     $('#editarNameOcu2').html("Auxiliar");
-
-                     $('#editarNameOcu3').val(3);
-                     $('#editarNameOcu3').html("Cajero");
-
-                     $('#editarNameOcu4').val(4);
-                     $('#editarNameOcu4').html("Bodeguista");
-
-
-
-                    }
+                    $('#editarVacant').val(respuesta["NameVacant"]);
 
                     $('#editarWage').val(respuesta["Wage"]);
 

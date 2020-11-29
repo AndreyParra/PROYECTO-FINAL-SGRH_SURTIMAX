@@ -86,11 +86,13 @@
 
                                  }
 
-                                 echo '
+                                 if($value["Id_Asp"] != 0) {
+
+                                  echo '
 
                                      <td class="text-center"><div class="btn-group">
 
-                                         <button class="btn btn-primary btn-xs  btnEditarCita" idCita="'.$value["id"].'"  data-toggle="modal" data-target="#modalEditarCita"><i class="icon-edit-3"></i></button>
+                                         <button class="btn-default btn btn-xs " ><i class="icon-edit-3 text-white"></i></button>
 
                                        
                                          <button class="btn btn-danger btn-xs btnEliminarCita" idCita="'.$value["id"].'" data-toggle="modal" data-target="#EliminarCita"><i class="icon-trash" style="color:white;"></i></button>
@@ -99,6 +101,25 @@
                                       </div></td>
 
                                  </tr>';
+
+                                 }else {
+                                   
+                                      echo '
+
+                                      <td class="text-center"><div class="btn-group">
+
+                                          <button class="btn btn-primary btn-xs  btnEditarCita" idCita="'.$value["id"].'"  data-toggle="modal" data-target="#modalEditarCita"><i class="icon-edit-3"></i></button>
+
+                                        
+                                          <button class="btn btn-danger btn-xs btnEliminarCita" idCita="'.$value["id"].'" data-toggle="modal" data-target="#EliminarCita"><i class="icon-trash" style="color:white;"></i></button>
+
+                                  
+                                      </div></td>
+
+                                  </tr>';
+
+                                 }
+                                 
 
                             }
   

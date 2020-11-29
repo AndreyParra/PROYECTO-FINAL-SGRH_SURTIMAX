@@ -513,5 +513,101 @@
 
     }
 
+    public static function mensajeInicio() {
+
+      if(isset($_POST["fullname"])){
+
+        $fullname = $_POST["fullname"];
+
+        $lastname = $_POST["lastname"];
+
+        $document = $_POST["document"];
+
+        $email = $_POST["email"];
+        
+        $correo_destinario = "andreyparra595@gmail.com";
+
+        $tel = $_POST["tel"];
+
+        $cel = $_POST["cel"];
+
+        $comments = $_POST["comments"];
+
+        $mensaje = $_POST["mensaje"];
+
+        date_default_timezone_set("America/Bogota");
+
+              $mail = new PHPMailer;
+
+              $mail->isMail();
+
+              $mail->setFrom($email, $fullname.' '.$lastname);
+
+              $mail->addReplyTo($email, $fullname.' '.$lastname);
+          
+              $mail->Subject = $comments;
+              
+              $mail->addAddress($correo_destinario);
+              
+              $mail->msgHTML('
+              
+
+                  <div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
+
+                    <center>
+
+                      <img  style="padding:20px; width: 15%" src="https://www.grupoexito.com.co/sites/default/files/2019-12/logo-aliado_surtimax.png" alt="">
+
+                    </center>
+
+                    <div style="position:relative; margin:auto; width:600px; background:white; padding:20px">
+
+                      <center>
+
+                        <img style="padding:20px; width:10%; " src="https://www.vippng.com/png/detail/397-3975144_sobre-png-icono-email-rojo-png.png" alt="">
+
+                        <h3 style="font-weight:100; color:gray;">'.$mensaje.'. Mis teléfonos de contácto son:  Fijo: '.$tel.' y Celular: '.$cel.'</h3>
+                        <hr style="border:1px solid  #ccc; width:80%">
+
+                      </center>
+
+                    </div>
+
+
+                  </div> ');
+
+                  $envio = $mail->Send();
+
+                  if(!$envio) {
+
+                    echo "<script>
+
+                    Swal.fire({
+                      icon: 'error',
+                      title: '¡Ha ocurrido un problema enviando el correo a ".$correo_destinario .$mail->ErrorInfo."!',
+                    })
+   
+   
+                 </script>";
+                    
+
+                  }else {
+
+                          echo "<script>
+
+                          Swal.fire({
+                            icon: 'success',
+                            title: '¡Correo enviado correctamente!. Nosotros nos comunicaremos contigo',
+                          })
+        
+        
+                      </script>";
+                    
+                  }
+        
+      }
+
+    }
+
   	
   }

@@ -13,60 +13,15 @@
      
   	}
 
-  	  	static public function CrearVacante() {
-  	      
-  	  		if (isset($_POST["Name"])) {
-
-  	  	  	$tabla = "vacant";
-  	        
-  	        $Name = $_POST["Name"];
-  	        
-  	        $Wage = $_POST["Wage"];
-  	        
-  	        $Description = $_POST["Description"];
-  	        
-  	        $ID = $_SESSION["codigo"];
-
-  	  			           $resultado = Vacante::Insertar($tabla, $Name, $Wage, $Description, $ID);
-
-  	           
-  	  			    if ($resultado == "true") {
-  	  			    	
-  	  			    	echo "<script>
-
-  	  			    	   Swal.fire({
-  	  			    	     icon: 'success',
-  	  			    	     title: '¡Operación completada!',
-  	  			    	     title: 'Datos almacenados correctamente',
-  	  			    	   })
-
-
-  	  			    	</script>";
-  	  			    }	
-  	        else {
-
-  	  				echo "<script>
-
-  	  				   Swal.fire({
-  	  				     icon: 'error',
-  	  				     title: 'Oops...',
-  	  				     title: '¡Revisa el formato de los campos e intenta de nuevo!',
-  	  				   })
-
-
-  	  				</script>";
-  	  			}
-  	  		}
-  	}
 
 
   	static public  function EditarVacante() {
   	      
-  	  if (isset($_POST["editarName"])) {
+  	  if (isset($_POST["vacantNombre"])) {
 
   	        $tabla = "vacant";
   	       
-            $Name = $_POST["editarName"];
+            $Name = $_POST["vacantNombre"];
 
   	        $Wage = $_POST["editarWage"];
 
@@ -75,7 +30,7 @@
             $ID_employee = $_SESSION["codigo"];
 
 
-  	        $resultado = Vacante::Update($tabla, $Name, $Wage, $Description, $ID_employee,);
+  	        $resultado = Vacante::Update($tabla, $Name, $Wage, $Description, $ID_employee);
 
   	            if ($resultado == "true") {
   	              
@@ -85,7 +40,15 @@
   	                   icon: 'success',
   	                   title: '¡Operación completada!',
   	                   title: 'Datos actualizados correctamente',
-  	                 })
+  	                 }).then((result)=>{
+
+						if(result.value) {
+				   
+						  window.location = 'vacantes'; 
+			  
+						 }
+				   
+					   })
 
 
   	              </script>";

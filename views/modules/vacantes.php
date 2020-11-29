@@ -157,8 +157,7 @@
                             <br>
 
                             <em><b>Descripción:</b> '.$value["Description"].' </em>
-                            <br>
-                            <em><b>Personal requerido:</b> '.$value["Description"].' </em>
+
                           </div>
                           <div class="icon">
                             <i class="icon-shopping-cart1"></i>
@@ -273,26 +272,17 @@
           <div class="container-fluid text-left">
               <div class="box-body">
 
+                    <input type="hidden" id="editarVacant" name="vacantNombre">
 
-
-              <div class="form-row">
-                  <div class="form-group col-md-6 validar" style="padding-left:0">
+                  <div class="form-group validar" style="padding-left:0">
                     <label for="editarWage"  class="colLabel">Salario<span class="text-danger">*</span></label>
                     <input type="text" class="formulario__input" name="editarWage" id="editarWage" placeholder="Digíte el salario">
                   </div>
 
-                  <div class="form-group col-md-6 validar" style="padding:0">
-                    <label for="lastname"  class="colLabel">Personal requerido<span class="text-danger">*</span></label>
-                      <input type="number" class="formulario__input" name="lastname" id="lastname" placeholder="Digíte sus apellidos">
+                  <div class="form-group">
+                    <label for="Description">Descripción</label>
+                    <textarea class="color medida form-control" id="editarDescription" name="editarDescription" value="" ></textarea>
                   </div>
-
-                </div>
-
-
-               <div class="form-group">
-                 <label for="Description">Descripción</label>
-                 <textarea class="color medida form-control" id="editarDescription" name="editarDescription" value="" ></textarea>
-               </div>
 
              </div>
              
@@ -316,62 +306,6 @@
 </form>
 </div>
 
-<!-- REGISTRAR VACANTE -->
-
-<div id="modalVacante" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="" aria-hidden="true">
-  <form method="post" enctype="multipart/form-data" class="validarFormulario">
-    <div class="modal-dialog ">
-     <div class="modal-content " style=" border-radius: 15px;">
-       
-       <div class="modal-header box box-success" style="background: rgb(0,141,76); color: rgba(255, 255, 255, .7); ">
-         <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
-         <h4 class="modal-title">Nueva Vacante <i class="icon-plus"></i></h4>
-       </div>
-        
-        <div class="modal-body">
-              <div class="box-body">
-               <div class="form-group validar">
-                 <label for="Name">Vacante</label>
-                 <select name="Name" class="color medida form-control" id="Name">
-                  <option value="">Seleccione...</option>
-                  <?php 
-                    $Vacantes = VacanteController::Opciones();
-
-                    foreach ($Vacantes as $key => $value) {   
-                    echo '<option value="'.$value["ID"].'">'.$value["Type"].'</option>';
-
-                    }
-                   ?>
-                 </select>
-               </div>
-               <div class="form-group validar">
-                 <label for= "Wage">Salario</label>
-                 <input type="number" class="color medida form-control" id="Wage" name="Wage" placeholder="Digíte el salario de la Vacante">
-               </div>
-               <div class="form-group validar">
-                 <label for="Description">Descripción</label>
-                 <textarea class="color medida form-control" id="Description" name="Description" placeholder="Digíte la descripción de la vacante"></textarea>
-               </div>
-             </div>
-             <div class="modal-footer">
-               <div class="btn-group pull-right">
-                 <button type="reset" class="medida btn btn-default">Limpiar <i class="icon-delete1"></i></button>
-
-                  <button type="submit" class="medida btn btn-success">Guardar <i class="icon-save2"></i></button>
-               </div>
-             </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php 
-
-             $nuevaVacante = new VacanteController();
-             $nuevaVacante -> CrearVacante();
-
-   ?>
-</form>
-</div>
 
 
 

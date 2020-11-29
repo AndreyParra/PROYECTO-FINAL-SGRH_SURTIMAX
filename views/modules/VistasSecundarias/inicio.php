@@ -87,7 +87,7 @@
 	                <img src="views/assets/img/maxx.png" alt="">
 	                 <br><p>ALIADO SURTIMAX | MERKA MAX PG</p>
 	        </div>
-	        <form action="" method="" class="formContact validarFormulario">
+	        <form action="" method="post" class="formContact validarFormulario">
 	            <label>Recuerde que los campos marcados con '<span>*</span>' son obligatorios</label>
 	            <br><br>
 
@@ -163,7 +163,15 @@
 	                </div>
 	              </div>
 	            
-	             <script type="text/javascript" src="views/assets/js/validar.js"></script>
+				 <script type="text/javascript" src="views/assets/js/validar.js"></script>
+				 
+				 <?php
+					
+					$enviar = new UsuarioController();
+
+					$enviar->mensajeInicio();
+
+				 ?>
 	        </form>
 	    </div>
 	</div>

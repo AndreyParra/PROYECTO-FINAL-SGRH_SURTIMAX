@@ -138,17 +138,83 @@
 
     static public function ctrAsignarCita() {
       if (isset($_POST["idcita"])) {
+
             $id = $_POST["idcita"];
+
             $idcandidate = $_POST["UsrCita"];
-            $respuesta = Cita::Asignar($id,$idcandidate);
+
+            $respuesta = Cita::Asignar($id, $idcandidate);
 
             if ($respuesta == "ok"){
 
-              echo  " <script>
+              $respuesta1 = Cita::traerAspirante($idcandidate);
+
+              if($respuesta1) {
+
+                date_default_timezone_set("America/Bogota");
+
+                $mail = new PHPMailer;
+  
+                $mail->isMail();
+  
+                $mail->setFrom('aliadosurtimaxmerkamax@gmail.com', 'Merka Max PG | Aliado Surtimax');
+  
+                $mail->addReplyTo('aliadosurtimaxmerkamax@gmail.com', 'Merka Max PG | Aliado Surtimax');
+            
+                $mail->Subject = "Cita programada a Merka Max PG | Aliado Surtimax ";
+                
+                $mail->addAddress($respuesta1["Mail"]);
+                
+                $mail->msgHTML('
+                
+  
+                    <div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
+  
+                      <center>
+  
+                        <img  style="padding:20px; width: 15%" src="https://www.grupoexito.com.co/sites/default/files/2019-12/logo-aliado_surtimax.png" alt="">
+  
+                      </center>
+  
+                      <div style="position:relative; margin:auto; width:600px; background:white; padding:20px">
+  
+                        <center>
+  
+                          <img style="padding:20px; width:10%; " src="https://www.vippng.com/png/detail/397-3975144_sobre-png-icono-email-rojo-png.png" alt="">
+  
+                          <h3 style="font-weight:100; color:gray;">Estimado(a) '.$respuesta1["Name"].' '.$respuesta1["LastName"].' usted ha sido citado el día '.$respuesta1["date"].' a las '.$respuesta1["hour_start"].' hasta las '.$respuesta1["hour_end"].'. Por favor sea puntual y siga las siguientes recomendaciones: '.$respuesta1["comments"].'</h3>
+                          <hr style="border:1px solid  #ccc; width:80%">
+  
+                        </center>
+  
+                      </div>
+  
+  
+                    </div> ');
+  
+                    $envio = $mail->Send();
+  
+                    if(!$envio) {
+  
+                      echo "<script>
+  
+                      Swal.fire({
+                        icon: 'error',
+                        title: '¡Ha ocurrido un problema enviando la cita el correo a ".$respuesta1["Mail"].$mail->ErrorInfo."!',
+                      })
+     
+     
+                   </script>";
+                      
+  
+                    }else {
+  
+                  
+                    echo  " <script>
 
                        Swal.fire({
 
-                       title: 'Cita Asiganda Correctamente',
+                       title: 'Cita Asignada Correctamente',
                        icon: 'success',
                        confirmButtonColor: '#3085d6'
                        
@@ -163,7 +229,25 @@
                       }) 
 
                       </script";
-             
+                      
+                    }
+
+
+              }else {
+               
+                echo "<script>
+
+                Swal.fire({
+                  icon: 'Error',
+                  title: 'Oops...',
+                  title: 'Ha ocurrido un error al enviar la cita al correo ".$respuesta1["Mail"]."',
+                  })
+        
+              </script";
+
+
+              }
+ 
     }else{
 
       echo "<script>

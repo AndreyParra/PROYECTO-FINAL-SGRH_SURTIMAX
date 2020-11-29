@@ -1,3 +1,4 @@
+
 <?php
 
 require_once "Conexion.php";
@@ -141,6 +142,23 @@ require_once "Conexion.php";
 
     $stmt = null;
   }
+
+  public static function traerAspirante($idcandidate) {
+
+    $stmt = Conexion::conectar()->prepare("SELECT candidate.Name, candidate.LastName, interview.date, interview.hour_start, interview.hour_end, interview.comments, candidate.Mail FROM candidate INNER JOIN interview ON candidate.NumDocument = interview.Id_Asp WHERE candidate.NumDocument = :idcandidate");
+
+    $stmt->bindParam(":idcandidate", $idcandidate, PDO::PARAM_STR);
+
+    $stmt->execute();
+  
+    return $stmt->fetch();
+    
+    $stmt->close();
+   
+    $stmt = null;
+
+  }
+
 
     static public function ListarCitasDispo(){
 

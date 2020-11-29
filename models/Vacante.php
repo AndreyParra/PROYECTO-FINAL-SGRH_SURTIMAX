@@ -74,17 +74,14 @@
 
       }
 
-      static public function Update($tabla,$Name,$Wage,$Description,$ID,$icon,$IDVacant){
+      static public function Update($tabla, $Name, $Wage, $Description, $ID_employee){
 
-      $stmt = Conexion::conectar()->prepare("UPDATE $tabla set Wage = :Wage , description = :Description, ID_employee = :ID ,icon = :icon ,NameVacant = :Name where ID = IDVacant");
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla set Wage = :Wage , description = :Description, ID_employee = :ID_employee where NameVacant = :Name");
 
-
-      $stmt-> bindParam(":Name", $Name, PDO::PARAM_STR);
       $stmt-> bindParam(":Wage", $Wage, PDO::PARAM_STR);
       $stmt-> bindParam(":Description", $Description, PDO::PARAM_STR);
-      $stmt-> bindParam(":ID", $ID, PDO::PARAM_STR);
-      $stmt-> bindParam(":icon", $icon, PDO::PARAM_STR);
-      $stmt-> bindParam(":IDVacant", $IDVacant, PDO::PARAM_STR);
+      $stmt-> bindParam(":ID_employee", $ID_employee, PDO::PARAM_STR);
+      $stmt-> bindParam(":Name", $Name, PDO::PARAM_STR);
 
       if($stmt->execute()){
         
@@ -99,6 +96,8 @@
 
       $stmt = null;
     } 
+
+
     public static function Roles($tabla) {
         
       $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla Where ID <> 1");
