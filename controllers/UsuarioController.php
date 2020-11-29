@@ -87,87 +87,100 @@
             $respuesta1 = Empleado::editarPerfil($idUsuario);
 
 
-            // $fromemail = "aliadosurtimaxmerkamax@gmail.com";
-
-            // $fromname = "MerkaMax Aliado Surtimax";
-
-            // $host = "smtp.gmail.com";
-
-            // $port = "587";
-
-            // $SMTPAuth = "login";
-
-            // $SMTPSecure = "tls";
-
-            // $password = "merkamax123";
-
-            // $emailTo = $_POST["correo"];
-
-            // $subject = "Asignación de nueva contraseña";
-
-            // $bodyEmail = "Su nueva contraseña para el sistem de contratación de Merka Max PG es: ".$password1.", recuerde que puede cambiarla";
-
-
-
-
-            // $mail = new PHPMailer\PHPMailer\PHPMailer();
-
-            // try {
-
-            //   $mail->isSMTP();
-
-            //   $mail->SMTPDebug = 1;
-            //   $mail->Host = $host;
-            //   $mail->Port = $port;
-            //   $mail->SMTPAuth = $SMTPAuth;
-            //   $mail->SMTPSecure = $SMTPSecure;
-            //   $mail->Username = $fromemail;
-            //   $mail->Password = $password;
-
-            //   $mail->setFrom($fromemail, $fromname);
-            //   $mail->addAddress($emailTo);
-
-
-
-            //   $mail->isHTML(true);
-            //   $mail->Subject = $subject;
-
-            //   $mail->Body = $bodyEmail;
-
-            //   if (!$mail->send()) {
-
-            //     error_log("No se pudo enviar el correo");
-
-            //   }
-
-
-            //   echo "correo enviado con exito";
-
-              
-            // } catch (Exception $e) {
-              
-            // }
-
 
             if($respuesta == "ok" && $respuesta1 == "ok") {
 
-              echo "<script>
+              date_default_timezone_set("America/Bogota");
 
-                 Swal.fire({
-                   icon: 'success',
-                   title: '¡Usuario registrado correctamente!',
-                 }).then((result)=>{
+              $mail = new PHPMailer;
 
-                  if(result.value) {
-             
-                    window.location = 'usuarios'; 
+              $mail->isMail();
+
+              $mail->setFrom('aliadosurtimaxmerkamax@gmail.com', 'Merka Max PG | Aliado Surtimax');
+
+              $mail->addReplyTo('aliadosurtimaxmerkamax@gmail.com', 'Merka Max PG | Aliado Surtimax');
+          
+              $mail->Subject = "Asignación de nueva contraseña";
+              
+              $mail->addAddress($_POST["correo"]);
+              
+              $mail->msgHTML('
+              
+
+                  <div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
+
+                    <center>
+
+                      <img  style="padding:20px; width: 15%" src="https://www.grupoexito.com.co/sites/default/files/2019-12/logo-aliado_surtimax.png" alt="">
+
+                    </center>
+
+                    <div style="position:relative; margin:auto; width:600px; background:white; padding:20px">
+
+                      <center>
+
+                        <img style="padding:20px; width:10%; " src="https://www.vippng.com/png/detail/397-3975144_sobre-png-icono-email-rojo-png.png" alt="">
+
+                        <h3 style="font-weight:100; color:gray;">Su contraseña de acceso es: '.$password1.'</h3>
+                        <hr style="border:1px solid  #ccc; width:80%">
+
+                      </center>
+
+                    </div>
+
+
+                  </div> ');
+
+                  $envio = $mail->Send();
+
+                  if(!$envio) {
+
+                    echo "<script>
+
+                    Swal.fire({
+                      icon: 'error',
+                      title: '¡Ha ocurrido un problema enviando la contraseña el correo a ".$_POST["correo"].$mail->ErrorInfo."!',
+                    }).then((result)=>{
+   
+                     if(result.value) {
+                
+                       window.location = 'usuarios'; 
+           
+                      }
+                
+                    })
+   
+   
+                 </script>";
+                    
+
+                  }else {
+
+                          echo "<script>
+
+                          Swal.fire({
+                            icon: 'success',
+                            title: '¡Usuario registrado correctamente!, revise el correo ".$_POST["correo"]."',
+                          }).then((result)=>{
         
-                   }
-             
-                 }) 
+                          if(result.value) {
+                      
+                            window.location = 'usuarios'; 
+                
+                            }
+                      
+                          }) 
+        
+        
+                      </script>";
+                    
+                  }
 
 
-              </script>";
+
+
+
+           
 
             }else {
 
@@ -345,14 +358,156 @@
 
     public static function ctrRecuperarClave() {
 
-      if (isset($_POST["email"])) {
+      if (isset($_POST["emailRecuperar"])) {
         
-        $email = $_POST["email"];
+        $email = $_POST["emailRecuperar"];
 
-        $respuesta = Usuario::recuperarClave($email);
+          //Generar contraseña
+          $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+          $passwordRec = "";
 
-        var_dump($respuesta);
+          for($i=0; $i<=9; $i++) {
+             
+             //obtenemos un caracter aleatorio escogido de la cadena de caracteres
+             $passwordRec .= substr($str,rand(0,62),1);     
+          }
 
+          $encriptar = crypt($passwordRec, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+        
+          $respuesta = Usuario::recuperarClave($email);
+
+          if($respuesta){
+
+             $respuesta1 = Usuario::actualizarClave($respuesta[0], $encriptar);
+
+             if($respuesta1) {
+
+              date_default_timezone_set("America/Bogota");
+
+              $mail = new PHPMailer;
+
+              $mail->isMail();
+
+              $mail->setFrom('aliadosurtimaxmerkamax@gmail.com', 'Merka Max PG | Aliado Surtimax');
+
+              $mail->addReplyTo('aliadosurtimaxmerkamax@gmail.com', 'Merka Max PG | Aliado Surtimax');
+          
+              $mail->Subject = "Asignación de nueva contraseña";
+              
+              $mail->addAddress($_POST["emailRecuperar"]);
+              
+              $mail->msgHTML('
+              
+
+                  <div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
+
+                    <center>
+
+                      <img  style="padding:20px; width: 15%" src="https://www.grupoexito.com.co/sites/default/files/2019-12/logo-aliado_surtimax.png" alt="">
+
+                    </center>
+
+                    <div style="position:relative; margin:auto; width:600px; background:white; padding:20px">
+
+                      <center>
+
+                        <img style="padding:20px; width:10%; " src="https://www.vippng.com/png/detail/397-3975144_sobre-png-icono-email-rojo-png.png" alt="">
+
+                        <h3 style="font-weight:100; color:gray;">Su contraseña de acceso es: '.$passwordRec.'</h3>
+                        <hr style="border:1px solid  #ccc; width:80%">
+
+                      </center>
+
+                    </div>
+
+
+                  </div> ');
+
+                  $envio = $mail->Send();
+
+                  if(!$envio) {
+
+                    echo "<script>
+
+                    Swal.fire({
+                      icon: 'error',
+                      title: '¡Ha ocurrido un problema enviando la contraseña el correo a ".$_POST["emailRecuperar"].$mail->ErrorInfo."!',
+                    })
+   
+   
+                 </script>";
+                    
+
+                  }else {
+
+                          echo "<script>
+
+                          Swal.fire({
+                            icon: 'success',
+                            title: '¡Contraseña enviada correctamente!, revise el correo ".$_POST["emailRecuperar"]."',
+                          })
+        
+        
+                      </script>";
+                    
+                  }
+
+             }else {
+
+              echo "<script>
+
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                title: 'Ha ocurrido un error y la contraseña no se ha podido actualizar',
+              })
+ 
+ 
+             </script>";
+
+             }
+
+          }else {
+
+            echo "<script>
+
+             Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               title: 'Verifique su correo e intente de nuevo',
+             })
+
+
+            </script>";
+
+          }
+
+
+      }
+
+    }
+
+    public static function ctrEliminarChat() {
+
+      if(isset($_POST["eliminarTodo"])) {
+
+        $respuesta = Usuario::eliminarChat();
+
+          if($respuesta){
+
+            echo "<script>
+
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Oops...',
+                  title: 'Mensajes eliminados correctamente',
+                })
+
+
+                </script>";
+
+          }
 
       }
 

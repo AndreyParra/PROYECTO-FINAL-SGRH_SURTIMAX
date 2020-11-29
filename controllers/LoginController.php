@@ -36,6 +36,7 @@
 
                         echo '<script> window.location= "menu" </script>';
 
+
                         $fecha = date('Y-m-d');
                         $hora= date('H:i:s');
 

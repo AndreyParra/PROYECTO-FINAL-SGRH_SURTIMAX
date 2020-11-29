@@ -303,7 +303,7 @@
 
    public static function recuperarClave($email) {
 
-    $stmt = Conexion::conectar()->prepare("SELECT users.password FROM users inner join employee on Users.Id_Employee = employee.ID WHERE employee.Mail = :email");
+    $stmt = Conexion::conectar()->prepare("SELECT users.Id_Employee FROM users inner join employee on Users.Id_Employee = employee.ID WHERE employee.Mail = :email");
 
     $stmt->bindParam(":email", $email, PDO::PARAM_STR);
 
@@ -316,6 +316,44 @@
     $stmt = null;
 
    }
+
+   public static function actualizarClave($codigo, $password) {
+
+      $stmt = Conexion::conectar()->prepare("UPDATE users SET Password = :password WHERE ID_Employee = :codigo");
+  
+      $stmt->bindParam(":codigo", $codigo, PDO::PARAM_STR);
+
+      $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+  
+      if( $stmt->execute()) {
+
+         return true;
+
+      }else {
+         print_r(Conexion::conectar()->errorInfo());
+      }
+  
+  
+      $stmt-> close();
+  
+      $stmt = null;
+  
+     }
+
+     public static function eliminarChat(){
+
+      $stmt = Conexion::conectar()->prepare("DELETE FROM chat");
+
+      if($stmt->execute()){
+
+         return true;
+
+      }else {
+
+         print_r(Conexion::conectar()->errorInfo());
+      }
+
+     }
 
 
 

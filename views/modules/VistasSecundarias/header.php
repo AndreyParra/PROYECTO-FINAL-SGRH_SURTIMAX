@@ -88,7 +88,7 @@
 <!-- MODAL NUEVO USUARIO  -->
 <!-- Trigger the modal with a button -->
 
-<div id="modalNuevaContrasena" class="modal fade" role="dialog">
+<div id="modalNuevaContrasena" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
 
       <div class="modal-content" style="border-radius: 15px;">

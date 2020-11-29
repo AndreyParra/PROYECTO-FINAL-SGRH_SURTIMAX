@@ -18,6 +18,7 @@
   require_once 'models/Vacante.php'; //ruta de Vacante modelo
   require_once 'models/Cita.php';
 
+  require_once "PHPMailer/PHPMailerAutoload.php";
   
   $templete = new TempleteController(); //creamos la instancia a la clase Templete controller para acceder a sus metodos
 

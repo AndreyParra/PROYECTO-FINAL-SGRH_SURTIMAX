@@ -85,7 +85,7 @@
            <div class="login-box-body">
              <div class="login-logo">
                <img src="views/assets/img/logo-aliado.png" width="150px" >
-               <h3>Recordar Contraseña</h3>
+               <h3>Solicitud de nueva contraseña</h3>
              </div>
 
              <form action="" method="post" id="login">
