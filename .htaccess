@@ -1,0 +1,13 @@
+#se ocultan las carpetas del proyecto para que no puedan ser accedidas mediante url
+	
+	Options All -Indexes 
+
+#habilitaremos url amigables 
+
+	RewriteEngine On
+
+#Estos son los caracteres que se admitiran en la url
+
+	RewriteRule ^([-a-zA-Z0-9]+)$ index.php?ruta=$1
+
+	
