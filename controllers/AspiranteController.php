@@ -783,5 +783,19 @@ class AspiranteController
 		return $respuesta;
 	}
 
+	public static function ctrAspirantesCargo() {
+
+		$respuesta = Aspirante::aspirantesCargo();
+
+		return $respuesta;
+	}
+
+
+	public static function ctrAspirantesItem() {
+
+		$respuesta = Aspirante::aspirantesItem();
+
+		return $respuesta;
+	}
 
 }

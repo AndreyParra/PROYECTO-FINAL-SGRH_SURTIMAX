@@ -391,4 +391,35 @@ class Aspirante extends Conexion
 
 		$stmt = null;
 	}
+
+
+	public static function aspirantesCargo() {
+
+		$stmt = Conexion::conectar()->prepare("select occupation.Type as cargo, count(candidate.NumDocument) as total from candidate inner join vacant on candidate.id_Vacant = vacant.ID inner join occupation on vacant.NameVacant = occupation.ID group by(occupation.Type)
+		");
+
+		$stmt-> execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+		$stmt = null;
+
+	}
+
+
+	public static function aspirantesItem() {
+
+		$stmt = Conexion::conectar()->prepare("select count(NumDocument) as total, Status from candidate group by(Status)");
+
+		$stmt-> execute();
+
+		return $stmt->fetchAll();
+
+		$stmt->close();
+
+		$stmt = null;
+
+	}
 }

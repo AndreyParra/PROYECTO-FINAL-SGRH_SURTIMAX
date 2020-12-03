@@ -53,10 +53,11 @@
        
         if ($_SESSION["rol"] == "Administrador") {
 
-          
+          include "views/modules/inicio/panel-desactivar-usuario.php"; 
+          include "views/modules/inicio/aspirantesItem.php"; 
           include "views/modules/inicio/grafica-torta-usuario.php"; 
           include "views/modules/inicio/grafica-barras.php"; 
-          include "views/modules/inicio/panel-desactivar-usuario.php"; 
+
           
         }
 

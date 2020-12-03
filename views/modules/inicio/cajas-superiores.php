@@ -100,7 +100,7 @@
       <h4>Aspirantes Contratados</h4>
     </div>
     <div class="icon">
-      <i class="icon-file-plus"></i>
+      <i class="icon-user-plus"></i>
     </div>
     <a href="aspirantes" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
@@ -116,7 +116,7 @@
       <h4>Aspirantes Inactivos</h4>
     </div>
     <div class="icon">
-      <i class="icon-file-plus"></i>
+      <i class="icon-user-x"></i>
     </div>
     <a href="vacantes" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
@@ -134,7 +134,7 @@
       <h4>Citas Asignadas</h4>
     </div>
     <div class="icon">
-      <i class="icon-file-plus"></i>
+      <i class="icon-calendar"></i>
     </div>
     <a href="citas" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
@@ -150,7 +150,7 @@
       <h4>Empleados Inactivos</h4>
     </div>
     <div class="icon">
-      <i class="icon-file-plus"></i>
+      <i class="fas fa-user-slash"></i>
     </div>
     <a href="vacantes" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
