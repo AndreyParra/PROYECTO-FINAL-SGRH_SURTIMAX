@@ -256,4 +256,21 @@ require_once "Conexion.php";
       }
 
 
+      public static function contarEmpleadosInactivos() {
+
+        $stmt = Conexion::conectar()->prepare("SELECT count(ID) as totalEmpleadosInactivos FROM Employee where Status = 'I'");
+
+        $stmt-> bindParam(":valor", $valor, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt -> fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+
+      }
+
+
   }

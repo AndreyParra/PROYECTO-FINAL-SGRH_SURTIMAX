@@ -33,6 +33,7 @@ class Aspirante extends Conexion
 
 		
 		$stmt = Conexion::conectar()->prepare("SELECT count(NumDocument) as totalAspirantes FROM $tabla where status <> 'I'");
+		
 		$stmt->execute();
 
 		return $stmt->fetch();
@@ -361,5 +362,33 @@ class Aspirante extends Conexion
 
 		$stmt = null;
 
+	}
+
+
+	public static function contarAspirantesContratados() {
+
+		$stmt = Conexion::conectar()->prepare("SELECT COUNT(NumDocument) as totalAspirantes FROM Candidate WHERE Status = 'C' ");
+
+		$stmt-> execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+
+	public static function contarAspirantesInactivos() {
+
+		$stmt = Conexion::conectar()->prepare("SELECT COUNT(NumDocument) as totalAspirantesInactivos FROM Candidate WHERE Status = 'I' ");
+
+		$stmt-> execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+		$stmt = null;
 	}
 }

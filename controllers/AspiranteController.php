@@ -767,4 +767,21 @@ class AspiranteController
 		return $respuesta;
 
 	}
+
+	public static function ctrContarAspirantesContratados() {
+
+		$respuesta = Aspirante::contarAspirantesContratados();
+
+		return $respuesta;
+	}
+
+
+	public static function ctrContarAspirantesInactivos() {
+
+		$respuesta = Aspirante::contarAspirantesInactivos();
+
+		return $respuesta;
+	}
+
+
 }

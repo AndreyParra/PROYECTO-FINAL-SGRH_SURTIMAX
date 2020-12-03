@@ -157,6 +157,15 @@
     }
 
 
+    public static function ctrContarEmpleadosInactivos() {
+
+      $respuesta = Empleado::contarEmpleadosInactivos();
+
+      return $respuesta;
+      
+    }
+
+
     static public function ctrAsignarEmpleados($item, $valor){
 
      $respuesta = Empleado::asignarEmpleados($item, $valor);
@@ -386,5 +395,7 @@
 
       }
     }
+
+
 
   }

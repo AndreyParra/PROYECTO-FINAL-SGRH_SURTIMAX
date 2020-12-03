@@ -167,7 +167,27 @@ require_once "Conexion.php";
     $stmt-> execute();
 
     return $stmt-> fetchAll();
+ 
+    $stmt->close();
+   
+    $stmt = null;
+
     
+  }
+
+
+
+  public static function contarCitaAsignada() {
+
+    $stmt = Conexion::conectar()->prepare("SELECT count(ID) as totalAsignadas FROM interview WHERE id_Asp <> 0");
+    
+    $stmt->execute();
+  
+    return $stmt->fetch();
+    
+    $stmt->close();
+   
+    $stmt = null;
   }
 
 }

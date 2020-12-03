@@ -324,5 +324,14 @@
 
   }
 
+
+  public static function ctrContarCitaAsignada() {
+ 
+      $respuesta = Cita::contarCitaAsignada();
+
+      return $respuesta;
+
+  }
+
   
 }

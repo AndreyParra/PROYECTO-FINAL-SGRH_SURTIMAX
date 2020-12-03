@@ -143,9 +143,9 @@
                 <th width="10px">Perfil</th>
                 <th width="50px">Correo electrónico</th>
                  <th width="10px">Celular</th>
+                 <th width="10px">Teléfono </th>
                 <th>Estado</th>
                 <th>Ultimo ingreso</th>
-                <th width="10px">Género</th>
               </tr>
 
               </thead>
@@ -180,7 +180,8 @@
                             
                            
                             echo '<td class="tamano">'.$value["Mail"].'</td>
-                             <td class="tamano">'.$value["Cellphone"].'</td>';
+                             <td class="tamano">'.$value["Cellphone"].'</td>
+                             <td class="text-center tamano">'.$value["Phone"].'</td> ';
 
                             if ($value["Status"] == 'A') {
                               
@@ -193,7 +194,6 @@
                             }
 
                             echo '<td>'.$value["ultimoLogin"].'</td>
-                            <td class="text-center tamano">'.$value["Gender"].'</td>
                             
                             </tr>';
 
