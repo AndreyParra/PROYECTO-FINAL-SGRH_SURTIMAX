@@ -13,7 +13,7 @@
    
    <div class="box box-danger">
              <div class="box-header with-border">
-               <h3 class="box-title"><i class="fas fa-chart-bar"></i> Preferencias de los aspirantes por cargo</h3>
+               <h3 class="box-title"><i class="fas fa-chart-bar"></i> total de aspirantes por estado</h3>
              </div>
              <div class="box-body chart-responsive">
                   <canvas id="myCharttt" ></canvas>
